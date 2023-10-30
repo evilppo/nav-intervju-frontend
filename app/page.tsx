@@ -5,7 +5,7 @@ async function getData() {
     const requestHeaders = new Headers({
         'Authorization': `Bearer ${token}`
     });
-    const response = await fetch('https://arbeidsplassen.nav.no/public-feed/api/v1/ads', {headers: requestHeaders});
+    const response = await fetch('https://arbeidsplassen.nav.no/public-feed/api/v1/ads?size=100', {headers: requestHeaders});
     return response.json();
 }
 export default async function Page() {
