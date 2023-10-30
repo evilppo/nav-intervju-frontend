@@ -17,7 +17,11 @@ export default async function Page() {
         <main className="flex min-h-screen flex-col items-center justify-between p-24">
 
             <p>Forsiden</p>
-            <p>data totalelements: {data? data.totalElements :"no data"}</p>
+            <p>data totalelements: {data ? data.totalElements : "no data"}</p>
+            <p>data pageNumber: {data ? data.pageNumber : "no data"}</p>
+            <p>data pageSize: {data ? data.pageSize : "no data"}</p>
+            <p>data first: {data ? data.first : "no data"}</p>
+            <p>data last: {data ? data.last : "no data"}</p>
         </main>
     )
 }
