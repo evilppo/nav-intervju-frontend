@@ -10,11 +10,14 @@ async function getData() {
 }
 
 
-interface OccupationCategoriesLevels {
-    level1: string,
-    level2: string
+interface OccupationCategory {
+    level1: string;
+    level2: string;
 }
 
+interface OccupationCategories {
+    occupationCategories: OccupationCategory[];
+}
 
 interface Add {
     uuid: string,
@@ -28,7 +31,7 @@ interface Add {
     "source": string,
     "applicationUrl": string,
     "applicationDue": string,
-    "occupationCategories": OccupationCategoriesLevels[],
+    "occupationCategories": OccupationCategories,
     "jobtitle": string,
     "link": string,
     "employer": {},
