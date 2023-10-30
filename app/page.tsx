@@ -1,6 +1,7 @@
 import React from 'react';
-import { Heading, VStack } from '@navikt/ds-react';
+import {Heading, VStack} from '@navikt/ds-react';
 import Divider from '@navikt/ds-react/esm/dropdown/Menu/Divider';
+import DOMPurify from 'isomorphic-dompurify';
 
 async function getData() {
   const token: string =
@@ -69,19 +70,25 @@ const displaySingleAd = (ad: Ad) => {
         <Heading size='large' style={{ fontSize: 'x-large', margin: '1rem 0' }}>
           Beskrivelse:
         </Heading>
-        <div dangerouslySetInnerHTML={{ __html: ad.description }} />
+        <div
+          dangerouslySetInnerHTML={{
+            __html: DOMPurify.sanitize(ad.description),
+          }}
+        />
       </div>
       <Divider style={{ margin: '2rem 0' }} />
     </VStack>
   );
 };
-
 export default async function Page() {
   const data = await getData();
 
   return (
     <main className='flex flex-col items-center justify-between p-24'>
-      <Heading size='large' style={{ fontSize: 'xxx-large', marginBottom: '2rem' }}>
+      <Heading
+        size='large'
+        style={{ fontSize: 'xxx-large', marginBottom: '2rem' }}
+      >
         Stillingsannonser
       </Heading>
       {data
