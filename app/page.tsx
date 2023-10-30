@@ -8,6 +8,61 @@ async function getData() {
     const response = await fetch('https://arbeidsplassen.nav.no/public-feed/api/v1/ads?size=100', {headers: requestHeaders});
     return response.json();
 }
+
+
+interface OccupationCategoriesLevels {
+    level1: string,
+    level2: string
+}
+
+
+interface Add {
+    uuid: string,
+    published: string,
+    expires: string,
+    updated: string,
+    workLocations: string[],
+    "title": string
+    "description": string,
+    "sourceurl": string,
+    "source": string,
+    "applicationUrl": string,
+    "applicationDue": string,
+    "occupationCategories": OccupationCategoriesLevels[],
+    "jobtitle": string,
+    "link": string,
+    "employer": {},
+    "engagementtype": string,
+    "extent": string,
+    "starttime": string,
+    "positioncount": string,
+    "sector": string
+}
+
+const displaySingleAd = (add: Add) => {
+    return (
+        <div>
+            <p>{add.title}</p>
+            <p>{add.description}</p>
+            <p>{add.sourceurl}</p>
+            <p>{add.source}</p>
+            <p>{add.applicationUrl}</p>
+            <p>{add.applicationDue}</p>
+            <p>{add.jobtitle}</p>
+            <p>{add.link}</p>
+            <p>{add.engagementtype}</p>
+            <p>{add.extent}</p>
+            <p>{add.starttime}</p>
+            <p>{add.positioncount}</p>
+            <p>{add.sector}</p>
+        </div>
+    )
+}
+
+
+const displayAds = (ads: Add[]) => {
+    return ads.map(add => displaySingleAd(add))
+}
 export default async function Page() {
 
     const data = await getData()
@@ -22,6 +77,8 @@ export default async function Page() {
             <p>data pageSize: {data ? data.pageSize : "no data"}</p>
             <p>data first: {data ? data.first : "no data"}</p>
             <p>data last: {data ? data.last : "no data"}</p>
+
+            {data ? displayAds(data.content) : "no data"}
         </main>
     )
 }
