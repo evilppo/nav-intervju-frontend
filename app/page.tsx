@@ -74,16 +74,13 @@ const displaySingleAd = (ad: Ad) => {
   );
 };
 
-const displayAds = (ads: Ad[]) => {
-  return ads.map((add) => displaySingleAd(add));
-};
 export default async function Page() {
   const data = await getData();
 
   return (
     <main className='flex flex-col items-center justify-between p-24'>
       <Heading size='large'>Stillingsannonser</Heading>
-      {data ? displayAds(data.content) : 'Ingen annonser funnet'}
+      {data ? data.content.map((ad: Ad) => displaySingleAd(ad)) : 'Ingen annonser funnet'}
       <Divider />
     </main>
   );
