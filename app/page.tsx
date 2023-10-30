@@ -1,5 +1,5 @@
 import React from 'react';
-import {Heading, VStack} from '@navikt/ds-react';
+import { Heading, VStack } from '@navikt/ds-react';
 import Divider from '@navikt/ds-react/esm/dropdown/Menu/Divider';
 
 async function getData() {
@@ -67,9 +67,7 @@ const displaySingleAd = (ad: Ad) => {
         <Heading size='large'>Beskrivelse:</Heading>
         <div dangerouslySetInnerHTML={{ __html: ad.description }} />
       </div>
-      <br />
-      <Divider />
-      <br />
+      <Divider style={{ margin: '2rem 0' }} />
     </VStack>
   );
 };
@@ -80,8 +78,10 @@ export default async function Page() {
   return (
     <main className='flex flex-col items-center justify-between p-24'>
       <Heading size='large'>Stillingsannonser</Heading>
-      {data ? data.content.map((ad: Ad) => displaySingleAd(ad)) : 'Ingen annonser funnet'}
-      <Divider />
+      {data
+        ? data.content.map((ad: Ad) => displaySingleAd(ad))
+        : 'Ingen annonser funnet'}
+      <Divider style={{ margin: '2rem 0' }} />
     </main>
   );
 }
