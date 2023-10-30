@@ -1,5 +1,6 @@
 import React from 'react';
-import { Box, BodyLong } from '@navikt/ds-react';
+import {Heading, VStack} from '@navikt/ds-react';
+import Divider from '@navikt/ds-react/esm/dropdown/Menu/Divider';
 
 async function getData() {
   const token: string =
@@ -23,7 +24,14 @@ interface OccupationCategories {
   occupationCategories: OccupationCategory[];
 }
 
-interface Add {
+interface Employer {
+  name: string;
+  orgnr: string;
+  description: string;
+  homepage: string;
+}
+
+interface Ad {
   uuid: string;
   published: string;
   expires: string;
@@ -38,7 +46,7 @@ interface Add {
   occupationCategories: OccupationCategories;
   jobtitle: string;
   link: string;
-  employer: {};
+  employer: Employer;
   engagementtype: string;
   extent: string;
   starttime: string;
@@ -46,43 +54,37 @@ interface Add {
   sector: string;
 }
 
-const displaySingleAd = (add: Add) => {
+const displaySingleAd = (ad: Ad) => {
   return (
-    <Box background='surface-default' padding='6'>
-      <BodyLong>{add.title}</BodyLong>
-      <BodyLong>{add.description}</BodyLong>
-      <BodyLong>{add.sourceurl}</BodyLong>
-      <BodyLong>{add.source}</BodyLong>
-      <BodyLong>{add.applicationUrl}</BodyLong>
-      <BodyLong>{add.applicationDue}</BodyLong>
-      <BodyLong>{add.jobtitle}</BodyLong>
-      <BodyLong>{add.link}</BodyLong>
-      <BodyLong>{add.engagementtype}</BodyLong>
-      <BodyLong>{add.extent}</BodyLong>
-      <BodyLong>{add.starttime}</BodyLong>
-      <BodyLong>{add.positioncount}</BodyLong>
-      <BodyLong>{add.sector}</BodyLong>
-    </Box>
+    <VStack gap='4'>
+      <Heading size='large' level='1'>
+        Stillingstittel: {ad.title}
+      </Heading>
+      <div>
+        <Heading size='large'>Arbeidsgiver: {ad.employer.name}</Heading>
+      </div>
+      <div>
+        <Heading size='large'>Beskrivelse:</Heading>
+        <div dangerouslySetInnerHTML={{ __html: ad.description }} />
+      </div>
+      <br />
+      <Divider />
+      <br />
+    </VStack>
   );
 };
 
-const displayAds = (ads: Add[]) => {
+const displayAds = (ads: Ad[]) => {
   return ads.map((add) => displaySingleAd(add));
 };
 export default async function Page() {
   const data = await getData();
-  console.log('data.totalElements: ' + data?.totalElements);
 
   return (
-    <main className='flex min-h-screen flex-col items-center justify-between p-24'>
-      <p>Forsiden</p>
-      <p>data totalelements: {data ? data.totalElements : 'no data'}</p>
-      <p>data pageNumber: {data ? data.pageNumber : 'no data'}</p>
-      <p>data pageSize: {data ? data.pageSize : 'no data'}</p>
-      <p>data first: {data ? data.first : 'no data'}</p>
-      <p>data last: {data ? data.last : 'no data'}</p>
-
-      {data ? displayAds(data.content) : 'no data'}
+    <main className='flex flex-col items-center justify-between p-24'>
+      <Heading size='large'>Stillingsannonser</Heading>
+      {data ? displayAds(data.content) : 'Ingen annonser funnet'}
+      <Divider />
     </main>
   );
 }
