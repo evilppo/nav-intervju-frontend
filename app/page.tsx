@@ -1,4 +1,5 @@
 import React from 'react';
+import { Box, BodyLong } from '@navikt/ds-react';
 
 async function getData() {
   const token: string =
@@ -47,21 +48,21 @@ interface Add {
 
 const displaySingleAd = (add: Add) => {
   return (
-    <div>
-      <p>{add.title}</p>
-      <p>{add.description}</p>
-      <p>{add.sourceurl}</p>
-      <p>{add.source}</p>
-      <p>{add.applicationUrl}</p>
-      <p>{add.applicationDue}</p>
-      <p>{add.jobtitle}</p>
-      <p>{add.link}</p>
-      <p>{add.engagementtype}</p>
-      <p>{add.extent}</p>
-      <p>{add.starttime}</p>
-      <p>{add.positioncount}</p>
-      <p>{add.sector}</p>
-    </div>
+    <Box background='surface-default' padding='6'>
+      <BodyLong>{add.title}</BodyLong>
+      <BodyLong>{add.description}</BodyLong>
+      <BodyLong>{add.sourceurl}</BodyLong>
+      <BodyLong>{add.source}</BodyLong>
+      <BodyLong>{add.applicationUrl}</BodyLong>
+      <BodyLong>{add.applicationDue}</BodyLong>
+      <BodyLong>{add.jobtitle}</BodyLong>
+      <BodyLong>{add.link}</BodyLong>
+      <BodyLong>{add.engagementtype}</BodyLong>
+      <BodyLong>{add.extent}</BodyLong>
+      <BodyLong>{add.starttime}</BodyLong>
+      <BodyLong>{add.positioncount}</BodyLong>
+      <BodyLong>{add.sector}</BodyLong>
+    </Box>
   );
 };
 
