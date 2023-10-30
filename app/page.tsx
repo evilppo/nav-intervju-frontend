@@ -57,14 +57,18 @@ interface Ad {
 const displaySingleAd = (ad: Ad) => {
   return (
     <VStack gap='4'>
-      <Heading size='large' level='1'>
+      <Heading size='large' level='1' style={{ fontSize: 'x-large' }}>
         Stillingstittel: {ad.title}
       </Heading>
       <div>
-        <Heading size='large'>Arbeidsgiver: {ad.employer.name}</Heading>
+        <Heading size='large' style={{ fontSize: 'x-large' }}>
+          Arbeidsgiver: {ad.employer.name}
+        </Heading>
       </div>
       <div>
-        <Heading size='large'>Beskrivelse:</Heading>
+        <Heading size='large' style={{ fontSize: 'x-large', margin: '1rem 0' }}>
+          Beskrivelse:
+        </Heading>
         <div dangerouslySetInnerHTML={{ __html: ad.description }} />
       </div>
       <Divider style={{ margin: '2rem 0' }} />
@@ -77,7 +81,9 @@ export default async function Page() {
 
   return (
     <main className='flex flex-col items-center justify-between p-24'>
-      <Heading size='large'>Stillingsannonser</Heading>
+      <Heading size='large' style={{ fontSize: 'xxx-large', marginBottom: '2rem' }}>
+        Stillingsannonser
+      </Heading>
       {data
         ? data.content.map((ad: Ad) => displaySingleAd(ad))
         : 'Ingen annonser funnet'}
